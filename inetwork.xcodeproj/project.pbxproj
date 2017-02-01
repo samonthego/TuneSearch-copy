@@ -13,6 +13,7 @@
 		F54FA4F21E415C1200167251 /* inetwork.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F54FA4F01E415C1200167251 /* inetwork.xcdatamodeld */; };
 		F54FA4F41E415C1200167251 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F54FA4F31E415C1200167251 /* Assets.xcassets */; };
 		F54FA4F71E415C1200167251 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F54FA4F51E415C1200167251 /* LaunchScreen.storyboard */; };
+		F54FA4FF1E415CDE00167251 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54FA4FE1E415CDE00167251 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F54FA4F31E415C1200167251 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F54FA4F61E415C1200167251 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F54FA4F81E415C1200167251 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F54FA4FE1E415CDE00167251 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				F54FA4E91E415C1200167251 /* AppDelegate.swift */,
+				F54FA4FE1E415CDE00167251 /* Reachability.swift */,
 				F54FA4EB1E415C1200167251 /* ViewController.swift */,
 				F54FA4ED1E415C1200167251 /* Main.storyboard */,
 				F54FA4F31E415C1200167251 /* Assets.xcassets */,
@@ -99,6 +102,7 @@
 				TargetAttributes = {
 					F54FA4E51E415C1200167251 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 77L5QA924Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -141,6 +145,7 @@
 			files = (
 				F54FA4F21E415C1200167251 /* inetwork.xcdatamodeld in Sources */,
 				F54FA4EC1E415C1200167251 /* ViewController.swift in Sources */,
+				F54FA4FF1E415CDE00167251 /* Reachability.swift in Sources */,
 				F54FA4EA1E415C1200167251 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +269,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 77L5QA924Y;
 				INFOPLIST_FILE = inetwork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vmsi.inetwork;
@@ -276,6 +282,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 77L5QA924Y;
 				INFOPLIST_FILE = inetwork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vmsi.inetwork;
