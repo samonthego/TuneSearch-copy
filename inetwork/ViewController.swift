@@ -8,15 +8,35 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITextFieldDelegate{
 
     
-    let hostName = "www.moveablebytes.com"
+    //let hostName = "www.moveablebytes.com"
+    //let hostName = "http://itunes.apple.com/search?term=jack+johnson"
+    var artistName = [String]()
+    var albumName = [String]()
+    var songName = [String]()
+    var myArtistString:String = ""
+    var mySearchString:String = ""
+    var count:Int = 0
+
+    let hostName = "itunes.apple.com/"
     var reachability : Reachability?
     
     @IBOutlet var networkStatusLabel :UILabel!
+    @IBOutlet weak var myArtist: UITextField!
     
     
+    @IBAction func myAristPick(_ sender: UITextField) {
+        guard let textFieldString = myArtist.text else {
+            return
+        }
+       
+        let myArtistString = textFieldString.replacingOccurrences(of: " ", with: "+")
+        print("\(myArtistString)")
+        //mySearchString = "/search?term=tom+t+hall"
+        mySearchString = "/search?term=\(myArtistString)"
+    }
     
     
     //MARK: - Core Methods
@@ -25,13 +45,28 @@ class ViewController: UIViewController {
         do {
             let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String:Any]
             print ("JSON:\(jsonResult)")
-            let flavorsArray = jsonResult["flavors"] as! [[String:Any]]
-            for flavorDict in flavorsArray {
-            print("Flavor:\(flavorDict)")
+            let resultsArray = jsonResult["results"] as! [[String:Any]]
+            for resultsDict in resultsArray {
+            print("Results:\(resultsDict)")
             }
-            for flavorDict in flavorsArray {
-            print ("Flavor:\(flavorDict["name"])")
-            }
+            for resultsDict in resultsArray {
+                var artist = resultsDict["artistName"]
+                if artist != nil {artist = (resultsDict["artistName"] as! String) } else {artist = "No artist name"}
+                artistName.append(artist as! String)
+                print ("\(artist!)")
+            
+                var album = resultsDict["collectionName"]
+                if album != nil { album = (resultsDict["collectionName"] as! String)} else
+                { album = " "}
+                albumName.append(album as! String)
+                print("        \(album!)")
+                
+                var song = resultsDict["trackName"]
+                if song != nil {song = (resultsDict["trackName"] as! String) } else {song = " "}
+                songName.append(song as! String)
+                print("        \(song!)")
+            
+                            }
         }catch { print("JSON Parsing Error")}
         DispatchQueue.main.async {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -42,7 +77,7 @@ class ViewController: UIViewController {
     
     func getFile(filename: String){
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            let urlString = "http://\(hostName)\(filename)"
+            let urlString = "https://\(hostName)\(filename)"
             let url = URL(string: urlString)!
             var request = URLRequest(url:url)
             request.timeoutInterval = 30
@@ -77,12 +112,20 @@ class ViewController: UIViewController {
         guard let reach = reachability else {return}
         if reach.isReachable{
             //getFile(filename: "/classfiles/iOS_URL_Class_Get_File.txt")
-            getFile(filename: "/classfiles/flavors.json")
+            //getFile(filename: "/classfiles/flavors.json")
+            getFile(filename: mySearchString)
         }else{
             print("Host Not Reachable. Turn on the Internet")
         }
         
         
+    }
+    
+    //MARK: - TextField Delegate Methods
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     //MARK: - Reachability Methods
@@ -126,6 +169,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        myArtist.delegate = self
         setupReacability(hostName: hostName)
         startReachability()
     }
